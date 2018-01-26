@@ -1,0 +1,46 @@
+<div class="container">
+  <form class="mt-4" novalidate #form="ngForm" (ngSubmit)="addPost(form)">
+ <div class="form-group">
+
+   <h1>Posts</h1>
+   <div class="alert alert-danger" *ngIf="toTitle.errors?.required && toTitle.touched">Fill in title</div>
+   <div class="alert alert-danger" *ngIf="toBody.errors?.required && toBody.touched">Fill in post body</div>
+   <div class="alert alert-success" *ngIf="form.submitted">Posted success</div>
+   <label>Your title...</label>
+  <input
+    type="text"
+    class="form-control"
+    [(ngModel)]="post.title"
+    name="title"
+    #toTitle="ngModel"
+    required
+  >
+   <label>Your post body...</label>
+   <input
+     type="text"
+     class="form-control"
+     [(ngModel)]="post.body"
+     name="body"
+     #toBody="ngModel"
+     required
+     >
+    <button [disabled]="form.invalid" class="btn btn-primary mt-2">Make a post</button>
+ </div>
+  </form>
+  <button class="btn btn-dark mt-2 mb-2" (click)="getPosts()">Get posts</button>
+  <div class="post-list">
+    <div class="card mb-2" *ngFor="let post of posts; let i = index">
+    <div class="card-body">
+      <p class="size">{{i + 1}}.</p>
+      <h3>{{post.title}}</h3>
+      <p>{{post.body}}</p>
+      <button class="btn btn-danger" (click)="removePost()">Delete</button>
+
+
+    </div>
+  </div>
+
+</div>
+</div>
+
+
